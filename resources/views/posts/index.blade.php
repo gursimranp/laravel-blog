@@ -14,7 +14,7 @@
 </div>﻿
 <div class="row">
 	<div class="col-md-12">
-		<table class="table">
+		<table class="table table-hover">
 			<thead>
 				<th>#</th>
 				<th>Title</th>
@@ -27,13 +27,17 @@
 				<tr>
 					<th>{{ $post->id }}</th>
 					<td>{{ $post->title }}</td>
-					<td>{{ $post->body }}</td>
+					<td>{{ substr($post->body, 0, 30) }}{{ strlen(strip_tags($post->body)) > 30 ? "..." : "" }}</td>
 					<td>{{ $post->created_at->diffForHumans() }}</td>
 					<td><a href="{{ route('posts.show', $post->id) }}" class="btn btn-secondary btn-sm">View</a> <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-secondary btn-sm">Edit</a></td>
 				</tr>
 				@endforeach
 			</tbody>
 		</table>
+
+		<div class="text-center">
+			{!! $posts->links(); !!}
+		</div>
 	</div>
 </div>
 @endsection
