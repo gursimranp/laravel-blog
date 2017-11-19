@@ -13,11 +13,13 @@
     <!-- Custom styles for this template -->
     <style>
         body {
-            padding-top: 5rem;
+            padding-top: 1.5rem;
         }
         .starter-template {
             padding: 3rem 1.5rem;
-            text-align: center;
+        }
+        .btn-h1-spacing {
+            margin-top: 0.5rem;
         }
     </style>
 </head>
