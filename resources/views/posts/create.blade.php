@@ -14,6 +14,10 @@
         <input id="title" name="title" class="form-control">
       </div>
       <div class="form-group">
+        <label name="slug">Slug:</label>
+        <input id="slug" name="slug" class="form-control">
+      </div>
+      <div class="form-group">
         <label name="body">Post Body:</label>
         <textarea id="body" name="body" rows="5" class="form-control"></textarea>
       </div>

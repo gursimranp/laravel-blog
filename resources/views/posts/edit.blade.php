@@ -14,12 +14,16 @@
         <textarea type="text" class="form-control input-lg" id="title" name="title" rows="1" style="resize:none;">{{ $post->title }}</textarea> 
       </div> 
       <div class="form-group"> 
+        <label for="slug">Slug:</label> 
+        <textarea type="text" class="form-control input-lg" id="slug" name="slug" rows="1" style="resize:none;">{{ $post->slug }}</textarea> 
+      </div> 
+      <div class="form-group"> 
         <label for="body">Body:</label> 
         <textarea type="text" class="form-control input-lg" id="body" name="body" rows="10">{{ $post->body }}</textarea> 
       </div> 
     </div> 
     <div class="col-md-4">
-      <div class="well"> 
+      <div class="well">
         <dl class="dl-horizontal"> 
           <dt>Created at:</dt> <dd>{{ date('M j, Y h:i:sa', strtotime($post->created_at)) }}</dd> 
         </dl> 

@@ -8,7 +8,7 @@ use App\Post;
 class PagesController extends Controller
 {
 	public function index() {
-		$posts = Post::all();
+		$posts = Post::orderBy('id', 'desc')->limit(4)->get();
 		return view('pages.welcome')->withPosts($posts);
 	}
 
