@@ -1,7 +1,9 @@
 @extends('main')
 
 @section('title', ' | Edit Post')
-
+@section('stylesheets')
+<link rel="stylesheet" href="/css/select2.min.css" crossorigin="anonymous">
+@endsection
 @section('content')
 
 <div class="row">
@@ -17,6 +19,30 @@
         <label for="slug">Slug:</label> 
         <textarea type="text" class="form-control input-lg" id="slug" name="slug" rows="1" style="resize:none;">{{ $post->slug }}</textarea> 
       </div> 
+      <div class="form-group">
+        <label for="category_id">
+          <select name="category_id" id="category_id" class="form-control">
+          @foreach ($categories as $category)
+          <option value="{{ $category->id }}" {{ $category->id == $post->category_id ? 'selected' : '' }}>{{ $category->name }}</option>
+          @endforeach
+          </select>
+        </label>
+      </div> 
+      <div>
+        {{ var_dump($post) }}
+      </div>
+      <div class="form-group">
+        <label for="tags[]">
+          <select name="tags[]" id="tags[]" class="form-control select2-multi" multiple="multiple">
+          @foreach ($tags as $tag)
+          <option value="{{ $tag->id }}" {{ $tag->id == $post->tag_id ? 'selected' : '' }}>{{ $tag->name }}</option>
+          @endforeach
+          </select>
+        </label>
+      </div>
+      <div class="form-group">
+        <label for="tags"></label>
+      </div>
       <div class="form-group"> 
         <label for="body">Body:</label> 
         <textarea type="text" class="form-control input-lg" id="body" name="body" rows="10">{{ $post->body }}</textarea> 
@@ -44,4 +70,11 @@
     </div>﻿
   </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="/js/select2.full.min.js">`</script>
+<script type="text/javascript">
+  $('.select2-multi').select2();
+</script>
 @endsection
