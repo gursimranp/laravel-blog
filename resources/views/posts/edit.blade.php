@@ -20,34 +20,26 @@
         <textarea type="text" class="form-control input-lg" id="slug" name="slug" rows="1" style="resize:none;">{{ $post->slug }}</textarea> 
       </div> 
       <div class="form-group">
-        <label for="category_id">
-          <select name="category_id" id="category_id" class="form-control">
+        <label for="category_id">Category: </label>
+        <select name="category_id" id="category_id" class="form-control">
           @foreach ($categories as $category)
           <option value="{{ $category->id }}" {{ $category->id == $post->category_id ? 'selected' : '' }}>{{ $category->name }}</option>
           @endforeach
-          </select>
-        </label>
+        </select>
       </div> 
-      <div>
-        {{ var_dump($post) }}
-      </div>
       <div class="form-group">
-        <label for="tags[]">
-          <select name="tags[]" id="tags[]" class="form-control select2-multi" multiple="multiple">
-          @foreach ($tags as $tag)
-          <option value="{{ $tag->id }}" {{ $tag->id == $post->tag_id ? 'selected' : '' }}>{{ $tag->name }}</option>
+        <label for="tags[]">Tags: </label>
+        <select name="tags[]" id="tags" class="select2-multi form-control" multiple="multiple">
+          @foreach($tags as $tag)
+          <option value="{{ $tag->id }}">{{ $tag->name }}</option>
           @endforeach
-          </select>
-        </label>
+        </select>
       </div>
       <div class="form-group">
-        <label for="tags"></label>
-      </div>
-      <div class="form-group"> 
         <label for="body">Body:</label> 
         <textarea type="text" class="form-control input-lg" id="body" name="body" rows="10">{{ $post->body }}</textarea> 
       </div> 
-    </div> 
+    </div>
     <div class="col-md-4">
       <div class="well">
         <dl class="dl-horizontal"> 
@@ -75,6 +67,8 @@
 @section('scripts')
 <script src="/js/select2.full.min.js">`</script>
 <script type="text/javascript">
-  $('.select2-multi').select2();
+  var tags = {{ $postTags }}
+  $('#tags').select2();
+  $('#tags').select2().val(tags).trigger('change');﻿
 </script>
 @endsection

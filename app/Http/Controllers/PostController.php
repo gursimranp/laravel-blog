@@ -91,8 +91,8 @@ class PostController extends Controller
         $post = Post::find($id);
         $categories = Category::all();
         $tags = Tag::all();
-        dd($post);
-        return view('posts.edit')->withPost($post)->withCategories($categories)->withTags($tags);
+        $postTags = json_encode($post->tags->pluck('id'));
+        return view('posts.edit')->withPost($post)->withCategories($categories)->withTags($tags)->withPostTags($postTags);
     }
 
     /**
@@ -128,6 +128,8 @@ class PostController extends Controller
 
         $post->save();
 
+        $post->tags()->sync($request->tags, true);
+
         Session::flash('success', 'The blog post was successfully updated!');
 
         return redirect()->route('posts.edit', $post->id);
@@ -142,6 +144,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
+        $post->tags()->detach();
 
         $post->delete();
 

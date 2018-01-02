@@ -10,10 +10,39 @@
     <hr>
     <p class="lead">{{ $post->body }}</p>
     <hr>
-    <div class="tags">
+    <div id="tags">
+      <h3>Tags</h3>
       @foreach ($post->tags as $tag)
-        <span class="badge badge-default">{{ $tag->name }}</span>
+        <span class="badge badge-primary">{{ $tag->name }}</span>
       @endforeach
+    </div>
+    <hr>
+    <div id="comments">
+      <h3>{{ $post->comments()->count() }} Comments</h3>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Comment</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($post->comments as $comment)
+          <tr>
+            <td>{{ $comment->name }}</td>
+            <td>{{ $comment->email }}</td>
+            <td>{{ $comment->comment }}</td>
+            <td>
+              <a href="{{ route('comments.edit', $comment->id) }}" class="btn btn-sm btn-primary">Edit</a>
+              <a href="{{ route('comments.destroy', $comment->id) }}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
     </div>
   </div>
   <div class="col-md-4">
