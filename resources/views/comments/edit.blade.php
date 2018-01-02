@@ -21,7 +21,7 @@
 				<textarea name="comment" class="form-control">{{ $comment->comment }}</textarea>
 			</div>
 			<div class="form-group">
-				<input type="hidden" name="_token" value="{{ Session::token() }}">
+				{{ csrf_field() }}
 				<input type="submit" class="btn btn-primary">
 			</div>
 		</form>
