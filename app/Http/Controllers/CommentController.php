@@ -9,6 +9,10 @@ use Session;
 
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => 'store']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -103,6 +107,12 @@ class CommentController extends Controller
         return redirect()->route('posts.show', $comment->post_id);
     }
 
+    public function delete($id)
+    {
+        $comment = Comment::find($id);
+        return view('comments.delete')->withComment($comment);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -111,6 +121,12 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::find($id);
+        $post_id = $comment->post->id;
+        $comment->delete();
+
+        Session::flash('success', 'Comment has been deleted');
+
+        return redirect()->route('posts.show', $post_id);
     }
 }

@@ -10,6 +10,11 @@
 		<p>{{ $post->body }}</p>
 		<hr>
 		<p>Category: {{ $post->category->name }}</p>
+		<p>Tags: 
+			@foreach ($post->tags as $tag)
+			<span class="badge badge-primary">{{ $tag->name }}</span>
+			@endforeach
+		</p>
 	</div>
 </div>
 
@@ -18,12 +23,7 @@
 		<hr>
 		<h2>Comments</h2>
 		@foreach($post->comments as $comment)
-		<div class="card">
-			<div class="card-block">
-				{{ $comment->comment }}
-				<p class="card-text">By {{ $comment->name }}</p>
-			</div>
-		</div>
+		<p>{{ $comment->name }}: {{ $comment->comment }}</p>
 		@endforeach
 	</div>
 </div>
